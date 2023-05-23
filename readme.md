@@ -8,6 +8,8 @@
 - [x] CSS 초기화
 - [x] main.js 구성
 - [x] App.js 구성
+- [x] 테스트 데이터
+- [x] api 연동
 - [ ] PostPage.js 구현
 - [ ] PostList.js 구현
 - [ ] Editor.js 구현
