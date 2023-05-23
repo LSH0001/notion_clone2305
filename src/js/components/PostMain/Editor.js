@@ -5,8 +5,8 @@ function Editor({$target}) {
 
     this.render = () => {
         $editor.innerHTML = `
-            <input type="text" name="title">
-            <textarea name="content" id="" cols="30" rows="10"></textarea>
+            <input type="text" name="title" style="width:600px">
+            <textarea name="content" style="width:600px; height:600px;"></textarea>
         `
     }
 

@@ -10,3 +10,4 @@
 - [x] App.js 구성
 - [ ] PostPage.js 구현
 - [ ] PostList.js 구현
+- [ ] Editor.js 구현
