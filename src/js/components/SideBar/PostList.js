@@ -13,33 +13,34 @@ function PostList({$target, initialState}) {
 
     this.createTreeView = (data) => {
         let str = ""
-
-        for (const key in data){
-            if(data[key].document.length!==0){
-                str += `<li data-id="${data[key].id}">${data[key].title}
-                    <ul>
-                        ${this.createTreeView(data[key].document)}
-                        </ul>
-                </li>
-                `
-            } else {
-                str += `<li data-id="${data[key].id}">${data[key].title}</li>`
-                
-            }
+        //console.log(data)
+        if(data.documents.length!==0){
+            str += `<li data-id="${data["id"]}">${data["title"]}
+                <ul>
+                    ${data["documents"].map(element => {
+                        return this.createTreeView(element)  
+                    }).join("")}
+                </ul>
+            </li>
+            `
+        } else {
+            str += `<li data-id="${data["id"]}">${data["title"]}</li>`
         }
+        
+
+        console.log(str);
+        return str
     }
 
     this.render = () => {
         $postList.innerHTML = `
             <ul>
                 ${this.state
-                    .map((data) => `<li data-id="${data.id}">${data.title}</li>
+                    .map((data) => `
                     ${
-                        data.documents 
-                        ? 
-                        `<ul>${this.createTreeView()}</ul>` 
-                        : 
-                        ""
+                    
+                        `<ul>${this.createTreeView(data)}</ul>` 
+                    
                     }
                     `).join("")
                 }

@@ -1,6 +1,6 @@
 export const API_END_POINT = "https://mwu1.notion.edu-api.programmers.co.kr"
 
-export const request = (url, option = {}) => {
+export const request = (url, option = {},data = null) => {
 
     try{
         const res = fetch(`${API_END_POINT}${url}`, {
@@ -8,7 +8,8 @@ export const request = (url, option = {}) => {
             headers:{
                 "x-username" : "test",
                 "Content_Type" : "application/json"
-            }
+            },
+            body:data
     
         })
         
