@@ -1,3 +1,5 @@
+import { push } from "../router.js"
+
 function PostList({$target, initialState}) {
     const $postList = document.createElement("div")
 
@@ -15,7 +17,7 @@ function PostList({$target, initialState}) {
         let str = ""
         //console.log(data)
         if(data.documents.length!==0){
-            str += `<li data-id="${data["id"]}">${data["title"]}
+            str += `<li data-id="${data.id}">${data.title}
                 <ul>
                     ${data["documents"].map(element => {
                         return this.createTreeView(element)  
@@ -24,11 +26,10 @@ function PostList({$target, initialState}) {
             </li>
             `
         } else {
-            str += `<li data-id="${data["id"]}">${data["title"]}</li>`
+            str += `<li data-id="${data.id}">${data.title}</li>`
         }
         
 
-        console.log(str);
         return str
     }
 
@@ -38,18 +39,28 @@ function PostList({$target, initialState}) {
                 ${this.state
                     .map((data) => `
                     ${
-                    
                         `<ul>${this.createTreeView(data)}</ul>` 
-                    
                     }
                     `).join("")
                 }
             </ul>
         `
     }
-
     // 최초 한번 시작
     this.render()
+
+
+    
+    $postList.addEventListener('click',(e)=>{
+
+        const $li = e.target.closest('li')
+        if($li){
+            const {id} = $li.dataset
+
+            push(`/${id}`)
+        }
+    })
 }
+
 
 export default PostList;

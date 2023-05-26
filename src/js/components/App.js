@@ -1,19 +1,44 @@
 import PostEditPage from "./PostMain/PostEditPage.js";
 import PostPage from "./SideBar/PostPage.js";
+import { request } from "./api.js";
+import { initRouter } from "./router.js";
 function App({$target}) {
+    const $sideBar = document.createElement("div")
+    const $postMain = document.createElement("div")
+    $target.appendChild($sideBar)
+    $target.appendChild($postMain)
+
     const postPage = new PostPage({
-        $target
+        $target :$sideBar
     })
 
     postPage.render()
 
     
     const postEditPage = new PostEditPage({
-        $target,
+        $target : $postMain,
         initialState: {}
     })
 
     postEditPage.render()
+
+
+
+    this.route = () => {
+        const {pathname} = window.location
+        if (pathname==='/src/index.html'){
+
+        } else {
+            const [,docId] = pathname.split('/src/index.html/')
+            postEditPage.setState({docId})
+        }
+    }
+
+    this.route()
+
+
+
+    initRouter(()=>this.route())
 }
 
 export default App;

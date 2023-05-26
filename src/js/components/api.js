@@ -1,16 +1,15 @@
 export const API_END_POINT = "https://mwu1.notion.edu-api.programmers.co.kr"
 
-export const request = (url, option = {},data = null) => {
+export const request = async (url, option = {},data) => {
 
     try{
-        const res = fetch(`${API_END_POINT}${url}`, {
+        const res = await fetch(`${API_END_POINT}${url}`, {
             ...option,
             headers:{
-                "x-username" : "test",
+                "x-username" : "LSH",
                 "Content_Type" : "application/json"
             },
             body:data
-    
         })
         
         if (res.ok) {
