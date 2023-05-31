@@ -27,10 +27,12 @@ function App({$target}) {
     this.route = () => {
         const {pathname} = window.location
         if (pathname==='/src/index.html'){
-
+            postEditPage.setState({})
+            postPage.render()
         } else {
             const [,docId] = pathname.split('/src/index.html/')
             postEditPage.setState({docId})
+            postPage.render()
         }
     }
 

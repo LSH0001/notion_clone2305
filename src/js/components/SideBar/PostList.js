@@ -1,3 +1,4 @@
+import { request } from "../api.js"
 import { push } from "../router.js"
 
 function PostList({$target, initialState}) {
@@ -26,7 +27,7 @@ function PostList({$target, initialState}) {
             </li>
             `
         } else {
-            str += `<li data-id="${data.id}">${data.title}</li>`
+            str += `<li data-id="${data.id}">${data.title}<button class="addBtn">+</button><button class="delBtn">x</button></li>`
         }
         
 
@@ -39,7 +40,7 @@ function PostList({$target, initialState}) {
                 ${this.state
                     .map((data) => `
                     ${
-                        `<ul>${this.createTreeView(data)}</ul>` 
+                        `${this.createTreeView(data)}` 
                     }
                     `).join("")
                 }
@@ -51,16 +52,25 @@ function PostList({$target, initialState}) {
 
 
     
-    $postList.addEventListener('click',(e)=>{
-
+    $postList.addEventListener('click',async(e)=>{
         const $li = e.target.closest('li')
+        const {className} = e.target
         if($li){
             const {id} = $li.dataset
-
-            push(`/${id}`)
-        }
+            if (className==="addBtn"){
+                const newpost = await request(`/documents`,{method:"POST"},JSON.stringify({title:"new",parent:id}))
+                push(`/${newpost.id}`)
+            } else if (className==="delBtn"){
+                const x = await request(`/documents/${id}`,{method:"DELETE"})
+                push(``)
+            } else{
+                push(`/${id}`)
+            }
+            console.log(e.target.className)
+        } 
     })
 }
+
 
 
 export default PostList;

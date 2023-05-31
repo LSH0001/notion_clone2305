@@ -23,12 +23,15 @@ function PostEditPage({$target, initialState}) {
     }
 
     this.fetch = async (id) => {
-        const x = {
-            title : "멋짐",
-            parent: null
+        let docContent
+        if (id){
+            docContent = await request(`/documents/${id}`)
+        } else {
+            docContent = {
+                title : "",
+                content: ""
+            }
         }
-        const docContent = await request(`/documents`,{method: "POST"},JSON.stringify({title:"fgfg",parent:null}))
-        console.log(docContent)
         editor.setState(docContent)
     }
 }

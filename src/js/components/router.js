@@ -4,10 +4,10 @@ const ROUTE_CHANGE_EVENT = 'router-change'
 export const initRouter = (router) => {
     window.addEventListener(ROUTE_CHANGE_EVENT,(e)=>{
         const {nextUrl}= e.detail
-        if (nextUrl){
+        //if (nextUrl){
             history.pushState(null,null,`/src/index.html${nextUrl}`)
             router()
-        }
+        //}
 
     })
 }
