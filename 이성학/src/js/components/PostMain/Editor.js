@@ -26,6 +26,7 @@ function Editor({
 
     this.render()
 
+    $editor.querySelector('[name="title"]')
 
 
 }
